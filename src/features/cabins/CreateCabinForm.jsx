@@ -30,10 +30,10 @@ function CreateCabinForm() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    const imageData = { ...data, image: data.file[0] };
-    delete imageData.file;
+    const cabinData = { ...data, image: data.file[0] };
+    delete cabinData.file;
 
-    mutate(imageData);
+    mutate(cabinData);
   }
 
   function onError(errors) {
