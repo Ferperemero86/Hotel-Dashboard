@@ -29,7 +29,7 @@ function Cabins() {
           </Button>
         )}
 
-        {showForm && <CreateCabinForm />}
+        {showForm && <CreateCabinForm setShowForm={setShowForm} />}
       </Row>
     </>
   );
