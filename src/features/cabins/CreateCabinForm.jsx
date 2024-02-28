@@ -59,6 +59,12 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     console.log(errors);
   }
 
+  //function handleFormDisplay(e) {
+  //  e.preventDefault();
+  //
+  //  setShowForm(false);
+  //}
+
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
@@ -130,8 +136,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
       </FormRow>
 
       <FormRow>
-        <Button variation="secondary" type="reset">
-          Cancel
+        <Button variation="tertiary" type="reset">
+          Clear
         </Button>
         <Button disabled={isWorking}>
           {isEditSession ? "Edit cabin" : "Create new cabin"}

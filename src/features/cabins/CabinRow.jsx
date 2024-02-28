@@ -10,7 +10,7 @@ import Button from "../../ui/Button";
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 2fr;
+  grid-template-columns: 100px 1.8fr 2.2fr 1fr 1fr 150px;
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 3rem;
@@ -50,6 +50,7 @@ const Discount = styled.div`
 const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+  column-gap: 10px;
 `;
 
 function CabinRow({ cabin }) {
@@ -84,14 +85,14 @@ function CabinRow({ cabin }) {
         <Price>{formatCurrency(regularPrice)}</Price>
         <Discount>{formatCurrency(discount)}</Discount>
         <Buttons>
+          {!showForm && <Button onClick={() => setShowForm(true)}>Edit</Button>}
+          {showForm && (
+            <Button variation="tertiary" onClick={() => setShowForm(false)}>
+              Cancel
+            </Button>
+          )}
           <Button
-            variation="secondary"
-            onClick={() => setShowForm((show) => !show)}
-          >
-            Edit
-          </Button>
-          <Button
-            variation="secondary"
+            variation="danger"
             onClick={() => mutate(cabinId)}
             disabled={isDeleting}
           >
