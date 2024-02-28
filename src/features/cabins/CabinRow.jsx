@@ -1,13 +1,16 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import { formatCurrency } from "../../utils/helpers";
 import { deleteCabin } from "../../services/apiCabins";
+import CreateCabinForm from "./CreateCabinForm";
+import Button from "../../ui/Button";
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 2fr;
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 3rem;
@@ -44,7 +47,13 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 function CabinRow({ cabin }) {
+  const [showForm, setShowForm] = useState(false);
   const {
     id: cabinId,
     name,
@@ -67,16 +76,31 @@ function CabinRow({ cabin }) {
   });
 
   return (
-    <TableRow>
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity} guests</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
-      <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
-        Delete
-      </button>
-    </TableRow>
+    <>
+      <TableRow>
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity} guests</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        <Discount>{formatCurrency(discount)}</Discount>
+        <Buttons>
+          <Button
+            variation="secondary"
+            onClick={() => setShowForm((show) => !show)}
+          >
+            Edit
+          </Button>
+          <Button
+            variation="secondary"
+            onClick={() => mutate(cabinId)}
+            disabled={isDeleting}
+          >
+            Delete
+          </Button>
+        </Buttons>
+      </TableRow>
+      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+    </>
   );
 }
 
