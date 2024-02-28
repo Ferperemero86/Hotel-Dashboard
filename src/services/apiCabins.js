@@ -80,6 +80,31 @@ export async function createEditCabin(newCabin, id) {
   return data;
 }
 
+export async function duplicateCabin(id) {
+  const { data: cabin, error } = await supabase
+    .from("cabins")
+    .select()
+    .eq("id", id);
+
+  cabin[0].name = `${cabin[0].name}-${id + 1}`;
+  delete cabin[0].id;
+
+  console.log("DATA", cabin[0]);
+
+  if (error) {
+    throw new Error("Could not fetch cabin");
+  }
+
+  const { error: insertError } = await supabase
+    .from("cabins")
+    .insert(cabin[0])
+    .select();
+
+  if (insertError) {
+    throw new Error("Could not create cabin");
+  }
+}
+
 export async function deleteCabin(id) {
   const { data, error } = await supabase.from("cabins").delete().eq("id", id);
 
