@@ -27,3 +27,9 @@ export const formatCurrency = (value) =>
   new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(
     value
   );
+
+export const generateUniqueId = () => {
+  const timestamp = Date.now().toString(36); // Convert current timestamp to base36 string
+  const randomChars = Math.random().toString(36).substring(2, 8); // Generate random characters
+  return timestamp + "-" + randomChars;
+};

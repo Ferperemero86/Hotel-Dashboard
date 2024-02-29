@@ -7,7 +7,7 @@ import { useDuplicateCabin } from "./useDuplicateCabin";
 import CreateCabinForm from "./CreateCabinForm";
 
 import Button from "../../ui/Button";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiSquare2Stack, HiTrash, HiXMark } from "react-icons/hi2";
 
 const TableRow = styled.div`
   display: grid;
@@ -86,7 +86,7 @@ function CabinRow({ cabin }) {
           )}
           {showForm && (
             <Button variation="tertiary" onClick={() => setShowForm(false)}>
-              Cancel
+              <HiXMark />
             </Button>
           )}
           <Button

@@ -1,5 +1,7 @@
 import supabase from "./supabase";
 
+import { generateUniqueId } from "../utils/helpers";
+
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
 
@@ -86,10 +88,8 @@ export async function duplicateCabin(id) {
     .select()
     .eq("id", id);
 
-  cabin[0].name = `${cabin[0].name}-${id + 1}`;
+  cabin[0].name = generateUniqueId();
   delete cabin[0].id;
-
-  console.log("DATA", cabin[0]);
 
   if (error) {
     throw new Error("Could not fetch cabin");
