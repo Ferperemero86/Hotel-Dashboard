@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2.4rem;
 
   padding: 1.2rem 0;
@@ -25,6 +25,9 @@ const StyledFormRow = styled.div`
     justify-content: flex-end;
     gap: 1.2rem;
   }
+
+  ${(props) =>
+    props.isEditSession === true && `grid-template-columns: 24em 1.2fr 1fr`}
 `;
 
 const Label = styled.label`
@@ -36,9 +39,9 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-export default function FormRow({ label, error, children }) {
+export default function FormRow({ label, error, children, isEditSession }) {
   return (
-    <StyledFormRow>
+    <StyledFormRow isEditSession={isEditSession}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}

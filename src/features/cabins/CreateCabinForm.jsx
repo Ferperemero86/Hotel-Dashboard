@@ -9,7 +9,7 @@ import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
+function CreateCabinForm({ cabinToEdit = {}, setShowEditForm, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
   const { id: editId, ...editValues } = cabinToEdit;
@@ -35,7 +35,7 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
         {
           onSuccess: () => {
             reset();
-            setShowForm(false);
+            setShowEditForm(false);
           },
         }
       );
@@ -43,7 +43,7 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
       createCabin(cabinData, {
         onSuccess: () => {
           reset();
-          setShowForm(false);
+          onCloseModal?.();
         },
       });
   }
@@ -53,8 +53,15 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
-      <FormRow label="Cabin name" error={errors?.name?.message}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
+      <FormRow
+        label="Cabin name"
+        error={errors?.name?.message}
+        isEditSession={isEditSession}
+      >
         <Input
           type="text"
           id="name"
@@ -64,7 +71,11 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
           })}
         />
       </FormRow>
-      <FormRow label="Maximum capacity" error={errors?.max_capacity?.message}>
+      <FormRow
+        label="Maximum capacity"
+        error={errors?.max_capacity?.message}
+        isEditSession={isEditSession}
+      >
         <Input
           type="number"
           id="max_capacity"
@@ -74,7 +85,11 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
           })}
         />
       </FormRow>
-      <FormRow label="Regular price" error={errors?.regular_price?.message}>
+      <FormRow
+        label="Regular price"
+        error={errors?.regular_price?.message}
+        isEditSession={isEditSession}
+      >
         <Input
           type="number"
           id="regular_price"
@@ -84,7 +99,11 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
           })}
         />
       </FormRow>
-      <FormRow label="Discount" error={errors?.discount?.message}>
+      <FormRow
+        label="Discount"
+        error={errors?.discount?.message}
+        isEditSession={isEditSession}
+      >
         <Input
           type="number"
           id="discount"
@@ -109,6 +128,7 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
       <FormRow
         label="Description for website"
         error={errors?.description?.message}
+        isEditSession={isEditSession}
       >
         <Textarea
           type="number"
@@ -120,7 +140,11 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
         />
       </FormRow>
 
-      <FormRow label="Cabin photo" error={errors?.image?.message}>
+      <FormRow
+        label="Cabin photo"
+        error={errors?.image?.message}
+        isEditSession={isEditSession}
+      >
         <Input
           id="image"
           accept="image/*"
@@ -131,10 +155,7 @@ function CreateCabinForm({ cabinToEdit = {}, setShowForm }) {
         />
       </FormRow>
 
-      <FormRow>
-        <Button variation="tertiary" type="reset">
-          Clear
-        </Button>
+      <FormRow isEditSession={isEditSession}>
         <Button disabled={isWorking}>
           {isEditSession ? "Edit cabin" : "Create new cabin"}
         </Button>

@@ -55,7 +55,7 @@ const Buttons = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const {
     id: cabinId,
     name,
@@ -79,13 +79,13 @@ function CabinRow({ cabin }) {
           {discount === 0 ? <span>&mdash;</span> : formatCurrency(discount)}
         </Discount>
         <Buttons>
-          {!showForm && (
-            <Button onClick={() => setShowForm(true)}>
+          {!showEditForm && (
+            <Button onClick={() => setShowEditForm(true)}>
               <HiPencil />
             </Button>
           )}
-          {showForm && (
-            <Button variation="tertiary" onClick={() => setShowForm(false)}>
+          {showEditForm && (
+            <Button variation="tertiary" onClick={() => setShowEditForm(false)}>
               <HiXMark />
             </Button>
           )}
@@ -105,8 +105,11 @@ function CabinRow({ cabin }) {
           </Button>
         </Buttons>
       </TableRow>
-      {showForm && (
-        <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
+      {showEditForm && (
+        <CreateCabinForm
+          cabinToEdit={cabin}
+          setShowEditForm={setShowEditForm}
+        />
       )}
     </>
   );
