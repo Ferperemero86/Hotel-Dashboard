@@ -94,12 +94,12 @@ function CabinRow({ cabin }) {
             <HiSquare2Stack />
           </Button>
           <Modal>
-            <Modal.Open>
+            <Modal.Open opens="delete">
               <Button variation="danger">
                 <HiTrash />
               </Button>
             </Modal.Open>
-            <Modal.Window>
+            <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="cabins"
                 onConfirm={() => deleteCabin(cabinId)}
