@@ -1,12 +1,14 @@
-import { supabaseUrl } from "../services/supabase";
+//import { supabaseUrl } from "../services/supabase";
 
-const imageUrl = `${supabaseUrl}/storage/v1/object/public/cabin-images/`;
+const imageUrl = `${
+  import.meta.env.VITE_SUPABASE_URL
+}/storage/v1/object/public/cabin-images/`;
 
 export const cabins = [
   {
     name: "001",
-    maxCapacity: 2,
-    regularPrice: 250,
+    max_capacity: 2,
+    regular_price: 250,
     discount: 0,
     image: imageUrl + "cabin-001.jpg",
     description:
@@ -14,8 +16,8 @@ export const cabins = [
   },
   {
     name: "002",
-    maxCapacity: 2,
-    regularPrice: 350,
+    max_capacity: 2,
+    regular_price: 350,
     discount: 25,
     image: imageUrl + "cabin-002.jpg",
     description:
@@ -23,8 +25,8 @@ export const cabins = [
   },
   {
     name: "003",
-    maxCapacity: 4,
-    regularPrice: 300,
+    max_capacity: 4,
+    regular_price: 300,
     discount: 0,
     image: imageUrl + "cabin-003.jpg",
     description:
@@ -32,8 +34,8 @@ export const cabins = [
   },
   {
     name: "004",
-    maxCapacity: 4,
-    regularPrice: 500,
+    max_capacity: 4,
+    regular_price: 500,
     discount: 50,
     image: imageUrl + "cabin-004.jpg",
     description:
@@ -41,8 +43,8 @@ export const cabins = [
   },
   {
     name: "005",
-    maxCapacity: 6,
-    regularPrice: 350,
+    max_capacity: 6,
+    regular_price: 350,
     discount: 0,
     image: imageUrl + "cabin-005.jpg",
     description:
@@ -50,8 +52,8 @@ export const cabins = [
   },
   {
     name: "006",
-    maxCapacity: 6,
-    regularPrice: 800,
+    max_capacity: 6,
+    regular_price: 800,
     discount: 100,
     image: imageUrl + "cabin-006.jpg",
     description:
@@ -59,8 +61,8 @@ export const cabins = [
   },
   {
     name: "007",
-    maxCapacity: 8,
-    regularPrice: 600,
+    max_capacity: 8,
+    regular_price: 600,
     discount: 100,
     image: imageUrl + "cabin-007.jpg",
     description:
@@ -68,8 +70,8 @@ export const cabins = [
   },
   {
     name: "008",
-    maxCapacity: 10,
-    regularPrice: 1400,
+    max_capacity: 10,
+    regular_price: 1400,
     discount: 0,
     image: imageUrl + "cabin-008.jpg",
     description:

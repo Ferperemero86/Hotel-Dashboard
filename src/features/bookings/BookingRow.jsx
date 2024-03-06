@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { format, isToday } from "date-fns";
 
 import Tag from "../../ui/Tag";
+
 import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
@@ -36,15 +37,15 @@ const Amount = styled.div`
 
 function BookingRow({
   booking: {
-    id: bookingId,
-    created_at,
-    startDate,
-    endDate,
-    numNights,
-    numGuests,
-    totalPrice,
+    //id: bookingId,
+    //created_at,
+    start_date: startDate,
+    end_date: endDate,
+    num_nights: numNights,
+    //num_guests: numGuests,
+    total_price: totalPrice,
     status,
-    guests: { fullName: guestName, email },
+    guests: { full_name: guestName, email },
     cabins: { name: cabinName },
   },
 }) {
@@ -53,6 +54,8 @@ function BookingRow({
     "checked-in": "green",
     "checked-out": "silver",
   };
+
+  const lowerCaseStatus = status ? status.toLowerCase() : status;
 
   return (
     <Table.Row>
@@ -76,7 +79,9 @@ function BookingRow({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={statusToTagName[lowerCaseStatus]}>
+        {status ? status.replace("-", " ") : ""}
+      </Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
     </Table.Row>
