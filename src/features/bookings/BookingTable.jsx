@@ -4,11 +4,11 @@ import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import Spinner from "../../ui/Spinner";
 
-import { useBookings } from "../cabins/useBookings";
+import { useBookings } from "./useBookings";
 
 function BookingTable() {
   const { bookings, isLoading } = useBookings();
-  console.log("BOOKINGS", bookings);
+
   if (isLoading) return <Spinner />;
   if (!bookings.length) return <Empty resourceName="bookings" />;
 
