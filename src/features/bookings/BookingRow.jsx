@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { format, isToday } from "date-fns";
 
 import Tag from "../../ui/Tag";
-
+import Button from "../../ui/Button";
 import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
@@ -37,7 +38,7 @@ const Amount = styled.div`
 
 function BookingRow({
   booking: {
-    //id: bookingId,
+    id: bookingId,
     //created_at,
     start_date: startDate,
     end_date: endDate,
@@ -54,6 +55,7 @@ function BookingRow({
     "checked-in": "green",
     "checked-out": "silver",
   };
+  const navigate = useNavigate();
 
   const lowerCaseStatus = status ? status.toLowerCase() : status;
 
@@ -84,6 +86,10 @@ function BookingRow({
       </Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
+
+      <Button onClick={() => navigate(`/bookings/${bookingId}`)}>
+        Details
+      </Button>
     </Table.Row>
   );
 }
